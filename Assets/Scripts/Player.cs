@@ -4,35 +4,187 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    [SerializeField]
+    float turnSpeed = 4f;
+    [SerializeField]
+    float moveSpeed = 2.5f;
+    float xRotate = 0f;
+    float yRotate = 0f;
+    Vector3 rotateVec = Vector3.zero;
+    Vector3 jumpVec = Vector3.up;
+
     float x;
     float z;
-    float speed = 7;
     Vector3 moveVec = Vector3.zero;
     Rigidbody rigid;
 
+    Animator anim;
+    public SkinnedMeshRenderer bodyRenderer;
+    public SkinnedMeshRenderer hairRenderer;
+    [SerializeField]
+    Material[] bodyMaterials;
+    [SerializeField]
+    Material[] hairMaterials;
+
+    bool OnGround;
+    bool IsDraw = false;
+
+    public Transform handTr;
+    public Transform holsterTr;
+    public Transform pistolTr;
     void Start()
     {
         rigid = GetComponent<Rigidbody>();
+        anim = GetComponent<Animator>();
+        OnGround = true;
+        SetDraw(-1);
     }
 
     void Update()
     {
-        x = Input.GetAxisRaw("Horizontal");
-        z = Input.GetAxisRaw("Vertical");
+        if (Input.GetKey(KeyCode.LeftShift))
+            moveSpeed = 5f;
+        else
+            moveSpeed = 2.5f;
+
+        x = Input.GetAxisRaw("Horizontal"); // 좌우 이동
+        z = Input.GetAxisRaw("Vertical"); // 앞뒤 이동
+        moveVec.x = x;
         moveVec.z = z;
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        #region 애니메이션
+        if (x != 0)
+            anim.SetFloat("Speed", x > 0 ? moveSpeed : -x * moveSpeed /*Mathf.Abs(x * moveSpeed)*/);
+        else
+            anim.SetFloat("Speed", z > 0 ? moveSpeed : -z * moveSpeed /*Mathf.Abs(z * moveSpeed)*/);
+
+        anim.SetFloat("PosX", x);
+        anim.SetFloat("PosZ", z);
+        #endregion
+
+        if (Input.GetKeyDown(KeyCode.Space) && OnGround) // 점프
         {
-            rigid.AddForce(Vector3.up * speed, ForceMode.Impulse);
+            OnGround = false;
+            jumpVec.z = z;
+            jumpVec.x = x;
+            anim.SetBool("IsJump", true);
+            StartCoroutine(WaitJump());
         }
+
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            if (IsDraw)
+            {
+                anim.SetTrigger("Holster");
+                IsDraw = false;
+            }
+            else
+            {
+                anim.SetTrigger("Draw");
+                IsDraw = true;
+            }
+        }
+        else if (Input.GetKeyDown(KeyCode.R))
+        {
+            if (IsDraw)
+            {
+                anim.SetTrigger("Reload");
+            }
+        }
+        else if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            if (IsDraw)
+            {
+                anim.SetTrigger("Shoot");
+
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            bodyRenderer.material = bodyMaterials[0];
+            hairRenderer.material = hairMaterials[0];
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            bodyRenderer.material = bodyMaterials[1];
+            hairRenderer.material = hairMaterials[1];
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            bodyRenderer.material = bodyMaterials[2];
+            hairRenderer.material = hairMaterials[2];
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            bodyRenderer.material = bodyMaterials[3];
+            hairRenderer.material = hairMaterials[3];
+        }
+
+        //MouseRotation();
+    }
+
+    IEnumerator WaitJump()
+    {
+        yield return new WaitForSeconds(0.6f);
+        rigid.AddForce(jumpVec.normalized * moveSpeed * (moveSpeed == 2.5f ? 5f : 7f), ForceMode.Impulse);
+    }
+
+    IEnumerator WaitLanding()
+    {
+        yield return new WaitForSeconds(1f);
+        OnGround = true;
     }
 
     void FixedUpdate()
     {
-        transform.Translate(moveVec * Time.fixedDeltaTime * speed);
-        transform.Rotate(0, x, 0);
+        if (OnGround == false)
+            return;
+
+        transform.Translate(moveVec.normalized * Time.fixedDeltaTime * moveSpeed);
+        //transform.Rotate(0, x, 0);
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        anim.SetBool("IsJump", false);
+        if (collision.gameObject.CompareTag("Ground"))
+            StartCoroutine(WaitLanding());
+    }
+    void OnCollisionExit(Collision collision)
+    {
+        //if (collision.gameObject.CompareTag("Ground"))
+    }
+
+    void MouseRotation()
+    {
+        float yRotateSize = Input.GetAxis("Mouse X") * turnSpeed;
+        yRotate = transform.eulerAngles.y + yRotateSize;
+
+        float xRotateSize = -Input.GetAxis("Mouse Y") * turnSpeed;
+        xRotate = Mathf.Clamp(xRotate + xRotateSize, -45, 80);
+
+        rotateVec.x = xRotate;
+        rotateVec.y = yRotate;
+
+        transform.eulerAngles = rotateVec;
+    }
+    public void SetDraw(int val)
+    {
+        if (val == 1)
+        {
+            pistolTr.SetParent(handTr);
+        }
+        else if(val == -1)
+        {
+            pistolTr.SetParent(holsterTr);
+        }
+        pistolTr.localPosition = Vector3.zero;
+        pistolTr.localRotation = Quaternion.identity;
     }
 }
+
+
 
 //public class FirstPerson : MonoBehaviour
 //{
