@@ -37,7 +37,6 @@ public class Player : MonoBehaviour
         rigid = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
         OnGround = true;
-        SetDraw(-1);
     }
 
     void Update()
@@ -95,8 +94,7 @@ public class Player : MonoBehaviour
         {
             if (IsDraw)
             {
-                anim.SetTrigger("Shoot");
-
+                anim.SetTrigger("Fire");
             }
         }
 
@@ -127,12 +125,12 @@ public class Player : MonoBehaviour
     IEnumerator WaitJump()
     {
         yield return new WaitForSeconds(0.6f);
-        rigid.AddForce(jumpVec.normalized * moveSpeed * (moveSpeed == 2.5f ? 5f : 7f), ForceMode.Impulse);
+        rigid.AddForce(jumpVec.normalized * (moveSpeed == 2.5f ? 5f : 7f), ForceMode.Impulse);
     }
 
     IEnumerator WaitLanding()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1.3f);
         OnGround = true;
     }
 
@@ -150,10 +148,6 @@ public class Player : MonoBehaviour
         anim.SetBool("IsJump", false);
         if (collision.gameObject.CompareTag("Ground"))
             StartCoroutine(WaitLanding());
-    }
-    void OnCollisionExit(Collision collision)
-    {
-        //if (collision.gameObject.CompareTag("Ground"))
     }
 
     void MouseRotation()
