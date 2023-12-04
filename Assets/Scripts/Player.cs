@@ -7,7 +7,7 @@ public class Player : MonoBehaviour
     [SerializeField]
     float turnSpeed = 4f;
     [SerializeField]
-    float moveSpeed = 2.5f;
+    float moveSpeed = 1f;
     float xRotate = 0f;
     float yRotate = 0f;
     Vector3 rotateVec = Vector3.zero;
@@ -28,10 +28,12 @@ public class Player : MonoBehaviour
 
     bool OnGround;
     bool IsDraw = false;
+    bool IsStealth = false;
 
     public Transform handTr;
     public Transform holsterTr;
     public Transform pistolTr;
+
     void Start()
     {
         rigid = GetComponent<Rigidbody>();
@@ -41,10 +43,18 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKey(KeyCode.LeftShift))
-            moveSpeed = 5f;
+        if (Input.GetKeyDown(KeyCode.LeftControl))
+        {
+            IsStealth = !IsStealth;
+            anim.SetBool("IsStealth", IsStealth);
+        }
+
+        if (Input.GetKey(KeyCode.LeftShift) && IsStealth == false)
+            moveSpeed = 2f;
+        else if (IsStealth)
+            moveSpeed = 0.5f;
         else
-            moveSpeed = 2.5f;
+            moveSpeed = 1f;
 
         x = Input.GetAxisRaw("Horizontal"); // 좌우 이동
         z = Input.GetAxisRaw("Vertical"); // 앞뒤 이동
@@ -61,7 +71,7 @@ public class Player : MonoBehaviour
         anim.SetFloat("PosZ", z);
         #endregion
 
-        if (Input.GetKeyDown(KeyCode.Space) && OnGround) // 점프
+        if (Input.GetKeyDown(KeyCode.Space) && OnGround && IsStealth == false) // 점프
         {
             OnGround = false;
             jumpVec.z = z;
@@ -122,18 +132,6 @@ public class Player : MonoBehaviour
         //MouseRotation();
     }
 
-    IEnumerator WaitJump()
-    {
-        yield return new WaitForSeconds(0.6f);
-        rigid.AddForce(jumpVec.normalized * (moveSpeed == 2.5f ? 5f : 7f), ForceMode.Impulse);
-    }
-
-    IEnumerator WaitLanding()
-    {
-        yield return new WaitForSeconds(1.3f);
-        OnGround = true;
-    }
-
     void FixedUpdate()
     {
         if (OnGround == false)
@@ -175,6 +173,18 @@ public class Player : MonoBehaviour
         }
         pistolTr.localPosition = Vector3.zero;
         pistolTr.localRotation = Quaternion.identity;
+    }
+
+    IEnumerator WaitJump()
+    {
+        yield return new WaitForSeconds(0.6f);
+        rigid.AddForce(jumpVec.normalized * (moveSpeed == 2.5f ? 5f : 7f), ForceMode.Impulse);
+    }
+
+    IEnumerator WaitLanding()
+    {
+        yield return new WaitForSeconds(1.3f);
+        OnGround = true;
     }
 }
 
