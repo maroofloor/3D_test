@@ -175,6 +175,16 @@ public class Player : MonoBehaviour
         pistolTr.localRotation = Quaternion.identity;
     }
 
+    public void ShootPistol()
+    {
+        GameManager.Instance.ShootPistol();
+    }
+
+    public void ReloadPistol()
+    {
+        GameManager.Instance.ReloadPistol();
+    }
+
     IEnumerator WaitJump()
     {
         yield return new WaitForSeconds(0.6f);
