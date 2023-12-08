@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField]
-    float turnSpeed = 4f;
+    //[SerializeField]
+    //float turnSpeed = 4f;
     [SerializeField]
     float moveSpeed = 1f;
-    float xRotate = 0f;
-    float yRotate = 0f;
-    Vector3 rotateVec = Vector3.zero;
+    //float xRotate = 0f;
+    //float yRotate = 0f;
+    //Vector3 rotateVec = Vector3.zero;
     Vector3 jumpVec = Vector3.up;
 
     float x;
@@ -50,11 +50,11 @@ public class Player : MonoBehaviour
         }
 
         if (Input.GetKey(KeyCode.LeftShift) && IsStealth == false)
-            moveSpeed = 2f;
+            moveSpeed = 5f;
         else if (IsStealth)
-            moveSpeed = 0.5f;
-        else
             moveSpeed = 1f;
+        else
+            moveSpeed = 2.5f;
 
         x = Input.GetAxisRaw("Horizontal"); // 좌우 이동
         z = Input.GetAxisRaw("Vertical"); // 앞뒤 이동
@@ -71,14 +71,14 @@ public class Player : MonoBehaviour
         anim.SetFloat("PosZ", z);
         #endregion
 
-        if (Input.GetKeyDown(KeyCode.Space) && OnGround && IsStealth == false) // 점프
-        {
-            OnGround = false;
-            jumpVec.z = z;
-            jumpVec.x = x;
-            anim.SetBool("IsJump", true);
-            StartCoroutine(WaitJump());
-        }
+        //if (Input.GetKeyDown(KeyCode.Space) && OnGround && IsStealth == false) // 점프
+        //{
+        //    OnGround = false;
+        //    jumpVec.z = transform.position.z + ((z != 0 && z > 0) ? 1f : -1f);
+        //    jumpVec.x = transform.position.x + ((x != 0 && x > 0) ? 1f : -1f);
+        //    anim.SetBool("IsJump", true);
+        //    StartCoroutine(WaitJump());
+        //}
 
         if (Input.GetKeyDown(KeyCode.Tab))
         {
@@ -148,19 +148,19 @@ public class Player : MonoBehaviour
             StartCoroutine(WaitLanding());
     }
 
-    void MouseRotation()
-    {
-        float yRotateSize = Input.GetAxis("Mouse X") * turnSpeed;
-        yRotate = transform.eulerAngles.y + yRotateSize;
+    //void MouseRotation()
+    //{
+    //    float yRotateSize = Input.GetAxis("Mouse X") * turnSpeed;
+    //    yRotate = transform.eulerAngles.y + yRotateSize;
 
-        float xRotateSize = -Input.GetAxis("Mouse Y") * turnSpeed;
-        xRotate = Mathf.Clamp(xRotate + xRotateSize, -45, 80);
+    //    float xRotateSize = -Input.GetAxis("Mouse Y") * turnSpeed;
+    //    xRotate = Mathf.Clamp(xRotate + xRotateSize, -45, 80);
 
-        rotateVec.x = xRotate;
-        rotateVec.y = yRotate;
+    //    rotateVec.x = xRotate;
+    //    rotateVec.y = yRotate;
 
-        transform.eulerAngles = rotateVec;
-    }
+    //    transform.eulerAngles = rotateVec;
+    //}
     public void SetDraw(int val)
     {
         if (val == 1)

@@ -9,7 +9,7 @@ public class Door : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.E))
         {
             isOpen = !isOpen;
             if (isOpen)

@@ -11,9 +11,9 @@ public class AgentMove : MonoBehaviour
     NavMeshAgent agent;
 
     public Player player;
-    int offMesh_Jump = 2;
-    float jumpSpeed = 0.5f;
-    Coroutine jumpCor = null;
+    //int offMesh_Jump = 2;
+    //float jumpSpeed = 0.5f;
+    //Coroutine jumpCor = null;
 
     float dis;
 

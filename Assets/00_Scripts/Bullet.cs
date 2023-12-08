@@ -20,5 +20,6 @@ public class Bullet : MonoBehaviour
     public void SetInfo(Player player)
     {
         transform.position = player.pistolTr.position;
+        transform.rotation = player.pistolTr.rotation;
     }
 }
