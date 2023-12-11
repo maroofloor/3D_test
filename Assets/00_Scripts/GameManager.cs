@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour
 
     public Player player;
 
+    public Transform pos1, pos2;
+
     void Awake()
     {
         #region ½Ì±ÛÅæ »ý¼º

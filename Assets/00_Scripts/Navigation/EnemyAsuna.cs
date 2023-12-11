@@ -13,7 +13,7 @@ public class EnemyAsuna : MonoBehaviour
     [SerializeField]
     Transform player;
     [SerializeField]
-    Transform pos1, pos2;
+    public Transform pos1, pos2;
     [SerializeField]
     Transform rayTr;
 

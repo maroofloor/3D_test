@@ -1500,7 +1500,10 @@ GameObject:
   - component: {fileID: 506589395470567478}
   - component: {fileID: 5901941522562880076}
   - component: {fileID: 2313534251067755094}
-  - component: {fileID: 294208304214138922}
+  - component: {fileID: 1800561211}
+  - component: {fileID: 1800561212}
+  - component: {fileID: 1800561213}
+  - component: {fileID: 1800561214}
   m_Layer: 6
   m_Name: EnemyAsuna
   m_TagString: Enemy
@@ -1574,7 +1577,7 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &294208304214138922
+--- !u!114 &1800561211
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1583,21 +1586,49 @@ MonoBehaviour:
   m_GameObject: {fileID: 886106263257125516}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd74ec99e8e79e34b85f06fc5ee005b9, type: 3}
+  m_Script: {fileID: 11500000, guid: 351f3338834a2a347891d7ef0f6d7faa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  pos1: {fileID: 0}
-  pos2: {fileID: 0}
-  rayTr: {fileID: 1091847896}
-  ViewAngle: 120
-  ViewDistance: 5
-  obstacleMask:
-    serializedVersion: 2
-    m_Bits: 128
-  targetMask:
-    serializedVersion: 2
-    m_Bits: 8
+--- !u!114 &1800561212
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 886106263257125516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 686ce110d22b05f4b90f9b1686b97de2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1800561213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 886106263257125516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e5a5982a1f4c2342972feec640c8222, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NowState: 4
+--- !u!114 &1800561214
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 886106263257125516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e741851cba3ad425c91ecf922cc6b379, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _data:
+    _json: '{"declarations":{"Kind":"Object","collection":{"$content":[],"$version":"A"},"$version":"A"}}'
+    _objectReferences: []
 --- !u!1 &904758698757761622
 GameObject:
   m_ObjectHideFlags: 0
