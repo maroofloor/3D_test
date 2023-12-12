@@ -42,6 +42,40 @@ BlendTree:
   m_UseAutomaticThresholds: 1
   m_NormalizedBlendValues: 0
   m_BlendType: 0
+--- !u!1107 &-8025806223078740376
+AnimatorStateMachine:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Pistol
+  m_ChildStates:
+  - serializedVersion: 1
+    m_State: {fileID: -4385347966897194650}
+    m_Position: {x: 320, y: 120, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 2921747117100090341}
+    m_Position: {x: 320, y: 280, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: -9025709163359860934}
+    m_Position: {x: 610, y: 270, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 3074730552179369682}
+    m_Position: {x: 320, y: 450, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 9011095984182668326}
+    m_Position: {x: 20, y: 280, z: 0}
+  m_ChildStateMachines: []
+  m_AnyStateTransitions: []
+  m_EntryTransitions: []
+  m_StateMachineTransitions: {}
+  m_StateMachineBehaviours: []
+  m_AnyStatePosition: {x: 50, y: 20, z: 0}
+  m_EntryPosition: {x: 50, y: 120, z: 0}
+  m_ExitPosition: {x: 450, y: -10, z: 0}
+  m_ParentStateMachinePosition: {x: 610, y: 120, z: 0}
+  m_DefaultState: {fileID: -4385347966897194650}
 --- !u!1102 &-7840851687442576183
 AnimatorState:
   serializedVersion: 6
@@ -972,22 +1006,10 @@ AnimatorStateMachine:
   - serializedVersion: 1
     m_State: {fileID: -7840851687442576183}
     m_Position: {x: 30, y: 200, z: 0}
+  m_ChildStateMachines:
   - serializedVersion: 1
-    m_State: {fileID: -4385347966897194650}
-    m_Position: {x: 30, y: 300, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: 2921747117100090341}
-    m_Position: {x: 30, y: 400, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: -9025709163359860934}
-    m_Position: {x: 300, y: 300, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: 3074730552179369682}
-    m_Position: {x: -250, y: 400, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: 9011095984182668326}
-    m_Position: {x: 300, y: 400, z: 0}
-  m_ChildStateMachines: []
+    m_StateMachine: {fileID: -8025806223078740376}
+    m_Position: {x: 30, y: 310, z: 0}
   m_AnyStateTransitions: []
   m_EntryTransitions: []
   m_StateMachineTransitions: {}

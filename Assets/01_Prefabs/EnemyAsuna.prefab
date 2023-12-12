@@ -1614,6 +1614,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NowState: 4
+  targetMask:
+    serializedVersion: 2
+    m_Bits: 8
+  target: {fileID: 0}
 --- !u!114 &1800561214
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -6,7 +6,8 @@ public class AnimationComponent : MonoBehaviour
 {
     Animator anim;
 
-    void Start()
+    //void Start()
+    public void SetInit()
     {
         anim = GetComponent<Animator>();
     }
@@ -25,6 +26,32 @@ public class AnimationComponent : MonoBehaviour
         anim.SetFloat("Speed", 5f);
         anim.SetFloat("PosX", x);
         anim.SetFloat("PosZ", z);
+    }
+    public void Gun_Draw(bool isOn)
+    {
+        if (isOn)
+        {
+            anim.SetTrigger("Draw");
+        }
+        else
+        {
+            anim.SetTrigger("Holster");
+        }
+    }
+    public void Sword_Draw(bool isOn)
+    {
+        if (isOn)
+        {
+            //anim.SetTrigger("Draw");
+        }
+        else
+        {
+            //anim.SetTrigger("Holster");
+        }
+    }
+    public void Shoot()
+    {
+        anim.SetTrigger("Fire");
     }
     public void Attack()
     {

@@ -35,6 +35,11 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        CreateBullet();
+    }
+
+    public void CreateBullet()
+    {
         for (int i = 0; i < 12; i++)
         {
             GameObject tmp = Instantiate(bullet, transform);
@@ -48,7 +53,7 @@ public class GameManager : MonoBehaviour
         if (magQue.Count > 0)
         {
             Bullet tmp = magQue.Dequeue();
-            tmp.SetInfo(player);
+            tmp.SetInfo(player.pistolTr.position, player.pistolTr.rotation);
             tmp.gameObject.SetActive(true);
             Debug.Log($"남은 탄수 : {magQue.Count} / 12");
         }
@@ -56,6 +61,13 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log("탄이 모자랍니다, 재장전하세요.");
         }
+    }
+
+    public void EnemyShoot(Enemy enemy)
+    {
+        Bullet tmp = magQue.Dequeue();
+        tmp.SetInfo(enemy.pistolTr.position, enemy.pistolTr.rotation);
+        tmp.gameObject.SetActive(true);
     }
 
     public void ReloadPistol()
@@ -67,9 +79,16 @@ public class GameManager : MonoBehaviour
 
         for (int i = 0; i < 12; i++)
         {
-            if (usedQue.Count <= 0)
-                return;
+            if (usedQue.Count <= 0) 
+            {
+                GameObject tmp = Instantiate(bullet, transform);
+                usedQue.Enqueue(tmp.GetComponent<Bullet>());
+                tmp.SetActive(false);
+            }
             magQue.Enqueue(usedQue.Dequeue());
+
+            if (magQue.Count >= 12)
+                return;
         }
         Debug.Log($"남은 탄수 : {magQue.Count} / 12");
     }

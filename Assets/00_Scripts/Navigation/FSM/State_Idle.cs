@@ -25,9 +25,15 @@ public class State_Idle : State
 
     public override void OnStateStay()
     {
+        if (enemy.CheckSight())
+        {
+            StateDel(AllEnum.StateEnum.Chase);
+            return;
+        }
+
         if (currentTime >= nextTime)
         {
-            StateDel(AllEnum.StateEnum.Patrol);
+            StateDel(AllEnum.StateEnum.Walk);
             return;
         }
 

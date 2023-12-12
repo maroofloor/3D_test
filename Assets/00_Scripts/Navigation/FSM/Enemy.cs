@@ -17,12 +17,17 @@ public class Enemy : MonoBehaviour
 
     public StateMachine statemachine { get; private set; }
 
+    public Transform pistolTr;
+
+    //bool isOn = false;
+
     void Start()
     {
         anim = GetComponent<AnimationComponent>();
         agent = GetComponent<NavMeshAgent>();
         statemachine = GetComponent<StateMachine>();
 
+        anim.SetInit();
         statemachine.SetInIt();
     }
 
@@ -47,6 +52,22 @@ public class Enemy : MonoBehaviour
     {
         anim.Walk(agent.velocity.x, agent.velocity.z);
     }
+    public void SetDrawWeapon(bool isFar, bool isOn)
+    {
+        if (isFar)
+        {
+            anim.Gun_Draw(isOn);
+        }
+        else
+        {
+            anim.Sword_Draw(isOn);
+        }
+    }
+    public void Shoot()
+    {
+        anim.Shoot();
+        GameManager.Instance.EnemyShoot(this);
+    }
 
     public bool CheckSight()
     {
@@ -65,5 +86,12 @@ public class Enemy : MonoBehaviour
         }
         else
             return false;
+    }
+
+    public void SetDraw()
+    {
+    }
+    public void ShootPistol()
+    {
     }
 }

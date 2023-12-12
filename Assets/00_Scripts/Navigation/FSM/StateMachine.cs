@@ -22,6 +22,7 @@ public class StateMachine : MonoBehaviour
         StateDic.Add(AllEnum.StateEnum.Idle, new State_Idle(owner, SetState));
         StateDic.Add(AllEnum.StateEnum.Walk, new State_Walk(owner, SetState));
         StateDic.Add(AllEnum.StateEnum.Chase, new State_Chase(owner, SetState));
+        StateDic.Add(AllEnum.StateEnum.Attack, new State_Attack(owner, SetState));
 
         ExState = AllEnum.StateEnum.Walk;
         SetState(AllEnum.StateEnum.Idle);
@@ -30,9 +31,8 @@ public class StateMachine : MonoBehaviour
     void Update()
     {
         if (isPlay == false)
-        {
             return;
-        }
+
         if (ExState == owner.NowState /*&& owner.NowState != AllEnum.StateEnum.End*/)
         {
             StateDic[owner.NowState].OnStateStay();

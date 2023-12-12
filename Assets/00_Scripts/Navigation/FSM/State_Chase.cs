@@ -18,16 +18,16 @@ public class State_Chase : State
 
     public override void OnStateExit()
     {
-        enemy.target = null;
+        enemy.Idle();
     }
 
     public override void OnStateStay()
     {
-        if ((enemy.transform.position - targetTr.position).sqrMagnitude <= 1)
+        if ((enemy.transform.position - targetTr.position).sqrMagnitude <= 25)
         {
             //АјАн
-            //StateDel(AllEnum.StateEnum.Attack);
-            StateDel(AllEnum.StateEnum.Idle);
+            StateDel(AllEnum.StateEnum.Attack);
+            //StateDel(AllEnum.StateEnum.Idle);
             return;
         }
 

@@ -4,8 +4,12 @@ public class AllEnum
     {
         Idle,
         Walk,
+
         Chase,
+
         Attack,
+        Attack_Near,
+        Attack_Far,
 
         End
     }

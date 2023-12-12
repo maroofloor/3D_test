@@ -46,3 +46,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bullet: {fileID: 1676827983394334218, guid: 12fd78c971071664ab9415d69d1653bc, type: 3}
   player: {fileID: 0}
+  pos1: {fileID: 0}
+  pos2: {fileID: 0}

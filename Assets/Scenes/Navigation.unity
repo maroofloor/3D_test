@@ -271,6 +271,11 @@ OffMeshLink:
   m_BiDirectional: 1
   m_Activated: 1
   m_AutoUpdatePositions: 1
+--- !u!4 &365566431 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1635888466057435087, guid: f8eba6bff93d767478ea07cbd21afa37, type: 3}
+  m_PrefabInstance: {fileID: 4926040451236470976}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &410625917
 GameObject:
   m_ObjectHideFlags: 0
@@ -3010,11 +3015,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee9de035121d8894dac0c5cda2b5f2d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &1027181979 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8131462640605833815, guid: 798c05ee1e2530b4ebb1d9d7e5a2c6a9, type: 3}
-  m_PrefabInstance: {fileID: 742229055}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1080603102
 GameObject:
   m_ObjectHideFlags: 0
@@ -4125,6 +4125,14 @@ PrefabInstance:
       value: GameManager
       objectReference: {fileID: 0}
     - target: {fileID: 6608678717273290512, guid: 8f20f2217e56c94419239b66b62a11a4, type: 3}
+      propertyPath: pos1
+      value: 
+      objectReference: {fileID: 766991992}
+    - target: {fileID: 6608678717273290512, guid: 8f20f2217e56c94419239b66b62a11a4, type: 3}
+      propertyPath: pos2
+      value: 
+      objectReference: {fileID: 1266386899}
+    - target: {fileID: 6608678717273290512, guid: 8f20f2217e56c94419239b66b62a11a4, type: 3}
       propertyPath: player
       value: 
       objectReference: {fileID: 1027181975}
@@ -4181,18 +4189,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 294208304214138922, guid: f8eba6bff93d767478ea07cbd21afa37, type: 3}
-      propertyPath: pos1
+    - target: {fileID: 1800561213, guid: f8eba6bff93d767478ea07cbd21afa37, type: 3}
+      propertyPath: pistolTr
       value: 
-      objectReference: {fileID: 766991992}
-    - target: {fileID: 294208304214138922, guid: f8eba6bff93d767478ea07cbd21afa37, type: 3}
-      propertyPath: pos2
-      value: 
-      objectReference: {fileID: 1266386899}
-    - target: {fileID: 294208304214138922, guid: f8eba6bff93d767478ea07cbd21afa37, type: 3}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 1027181979}
+      objectReference: {fileID: 365566431}
     - target: {fileID: 506589395470567478, guid: f8eba6bff93d767478ea07cbd21afa37, type: 3}
       propertyPath: m_RootOrder
       value: 10

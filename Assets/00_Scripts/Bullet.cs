@@ -17,9 +17,9 @@ public class Bullet : MonoBehaviour
         GameManager.Instance.EnqueueUsedQue(this);
     }
 
-    public void SetInfo(Player player)
+    public void SetInfo(Vector3 pos, Quaternion rotate)
     {
-        transform.position = player.pistolTr.position;
-        transform.rotation = player.pistolTr.rotation;
+        transform.position = pos;
+        transform.rotation = rotate;
     }
 }
