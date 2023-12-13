@@ -19,7 +19,12 @@ public class Enemy : MonoBehaviour
 
     public Transform pistolTr;
 
-    //bool isOn = false;
+    //public bool isOn = false;
+
+    public float viewdistance = 0;
+    [Range(0, 360)]
+    public float viewAngle = 0;
+    public LayerMask targetmask;
 
     void Start()
     {
@@ -62,6 +67,7 @@ public class Enemy : MonoBehaviour
         {
             anim.Sword_Draw(isOn);
         }
+        //this.isOn = isOn;
     }
     public void Shoot()
     {

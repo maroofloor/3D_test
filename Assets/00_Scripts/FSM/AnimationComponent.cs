@@ -42,11 +42,11 @@ public class AnimationComponent : MonoBehaviour
     {
         if (isOn)
         {
-            //anim.SetTrigger("Draw");
+            Debug.Log("근접무기 장착");
         }
         else
         {
-            //anim.SetTrigger("Holster");
+            Debug.Log("근접무기 장착해제");
         }
     }
     public void Shoot()
