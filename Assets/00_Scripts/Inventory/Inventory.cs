@@ -44,6 +44,13 @@ public class Inventory //: MonoBehaviour
         }
     }
 
+    public void SwapItemsArr(int first, int second)
+    {
+        Item tmp = items[first];
+        items[first] = items[second];
+        items[second] = tmp;
+    }
+
     public void SetItemInInventory(Item item)
     {
         for (int i = 0; i < items.Length; i++)
@@ -51,18 +58,20 @@ public class Inventory //: MonoBehaviour
             if (items[i].itemIndex == item.itemIndex && items[i].itemNum < items[i].itemMaxNum)
             {
                 items[i].itemNum += item.itemNum;
-                int remain = items[i].itemNum - items[i].itemMaxNum;
-
                 if (items[i].itemNum > items[i].itemMaxNum)
                 {
+                    int remain = items[i].itemNum - items[i].itemMaxNum;
                     items[i].itemNum = items[i].itemMaxNum;
+                    SetItemInInventory(new Item(items[i].itemType, items[i].itemIndex, remain));
                 }
                 UIManager.Instance.inventoryUI.slotSpaceTr.GetChild(i).GetComponent<SlotUI>().SetMatching(items[i]);
                 return;
             }
-            else if (items[i].itemIndex != 0)
-                continue;
-            else
+        }
+
+        for (int i = 0; i < items.Length; i++)
+        {
+            if (items[i].itemIndex == 0)
             {
                 items[i] = item;
                 UIManager.Instance.inventoryUI.slotSpaceTr.GetChild(i).GetComponent<SlotUI>().SetMatching(items[i]);

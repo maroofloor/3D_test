@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+
 public class SlotUI : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     public int slotIndex;
@@ -15,9 +16,6 @@ public class SlotUI : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, ID
     Text numTxt;
 
     Item item;
-
-    //SlotUI startSlot;
-    SlotUI endSlot;
 
     void Start()
     {
@@ -57,12 +55,8 @@ public class SlotUI : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, ID
     public void OnBeginDrag(PointerEventData eventData)//드래그 시작
     {
         raycastResults.Clear();
-        //UIManager.Instance.GraphicRay.Raycast(eventData, raycastResults);
-        //raycastResults.Add(eventData.pointerCurrentRaycast);
-        /*startSlot = */
-        //raycastResults[0].gameObject.GetComponent<SlotUI>();
-        /*startSlot.*/img.color = Color.clear;
-        /*startSlot.*/numTxt.color = Color.clear;
+        img.color = Color.clear;
+        numTxt.color = Color.clear;
         UIManager.Instance.FollowDragImg.gameObject.SetActive(true);
         UIManager.Instance.FollowDragImg.transform.position = eventData.pressPosition;
         UIManager.Instance.FollowDragImg.sprite = item.itemSprite;
@@ -77,42 +71,23 @@ public class SlotUI : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, ID
     {
         UIManager.Instance.GraphicRay.Raycast(eventData, raycastResults);
 
-        //raycastResults.Add(eventData.pointerCurrentRaycast);
         for (int i = 0; i < raycastResults.Count; i++)
         {
-            if (raycastResults[i].gameObject.TryGetComponent<SlotUI>(out endSlot))
+            if (raycastResults[i].gameObject.TryGetComponent<SlotUI>(out nextSlot))
             {
-                //endSlot.GetComponent<Image>().color = Color.red;
-                Item tmp = /*startSlot.*/item;
-                /*startSlot.*/
-                item = endSlot.item;
-                endSlot.item = tmp;
-                /*startSlot.*/
-                SetMatching(/*startSlot.*/item);
-                endSlot.SetMatching(endSlot.item);
+                Item tmp = item;
+                item = nextSlot.item;
+                nextSlot.item = tmp;
+                ResourceManager.Instance.inventory.SwapItemsArr(slotIndex, nextSlot.slotIndex);
+                SetMatching(item);
+                nextSlot.SetMatching(nextSlot.item);
             }
         }
         UIManager.Instance.FollowDragImg.gameObject.SetActive(false);
-        /*startSlot.*/img.color = Color.white;
-        /*startSlot.*/numTxt.color = Color.white;
+        img.color = Color.white;
+        numTxt.color = Color.white;
 
-        
-
-        //if (endSlot != null)
-        //{
-        //    Item tmp = startSlot.item;
-        //    startSlot.item = endSlot.item;
-        //    endSlot.item = tmp;
-        //    startSlot.SetMatching(startSlot.item);
-        //    endSlot.SetMatching(endSlot.item);
-        //}
-        //else
-        //{
-        //    return;
-        //}
-
-        //startSlot = null;
-        endSlot = null;
+        nextSlot = null;
 
         //for (int i = 0; i < raycastResults.Count; i++)
         //{

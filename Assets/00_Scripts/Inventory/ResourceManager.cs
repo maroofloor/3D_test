@@ -40,7 +40,7 @@ public class ResourceManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            inventory.SetItemInInventory(new Item(AllEnum.ItemType.Potion, 1));
+            inventory.SetItemInInventory(new Item(AllEnum.ItemType.Potion, 1, 8));
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {

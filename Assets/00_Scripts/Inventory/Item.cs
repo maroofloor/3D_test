@@ -15,7 +15,14 @@ public class Item //: MonoBehaviour
     public int itemIndex;
     public Sprite itemSprite;
     public int itemNum;
-    public int itemMaxNum = 20;
+    public Dictionary<AllEnum.ItemType, int> itemMaxNumDic = new Dictionary<AllEnum.ItemType, int>() 
+    { 
+        { AllEnum.ItemType.Potion, 10 },
+        { AllEnum.ItemType.Armor, 1 },
+        { AllEnum.ItemType.Weapon, 1 },
+        {AllEnum.ItemType.Scrap, 5 } 
+    };
+    public int itemMaxNum => itemMaxNumDic[itemType];
 
     public Item()
     {
@@ -24,13 +31,6 @@ public class Item //: MonoBehaviour
         itemSprite = ResourceManager.Instance.itemSprites[0];
         itemNum = 0;
     }
-
-    /// <summary>
-    /// 아이템 생성자
-    /// </summary>
-    /// <param name="type"></param>
-    /// <param name="index"></param>
-    /// <param name="num">입력하지 않으면 1</param>
     public Item(AllEnum.ItemType type, int index, int num = 1)
     {
         itemType = type;
