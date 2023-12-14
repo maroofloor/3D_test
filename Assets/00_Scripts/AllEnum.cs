@@ -13,5 +13,14 @@ public class AllEnum
 
         End
     }
+    public enum ItemType
+    {
+        Potion,
+        Armor,
+        Weapon,
+        Scrap,
+
+        End
+    }
 
 }

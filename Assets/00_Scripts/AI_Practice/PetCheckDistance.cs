@@ -9,6 +9,8 @@ public class PetCheckDistance : PetNode
 
     float dist = 0;
 
+    bool isFollow = false;
+
     public PetCheckDistance(Transform pet, Transform player)
     {
         Player = player;
@@ -20,13 +22,25 @@ public class PetCheckDistance : PetNode
         dist = (Player.position - Pet.position).sqrMagnitude;
 
         if (dist >= 25f)
+        {
+            isFollow = true;
             return PetNodeState.Success;
+        }
         else if (dist <= 4)
+        {
+            isFollow = false;
             return PetNodeState.Failure;
+        }
+        else if (isFollow)
+        {
+            return PetNodeState.Success;
+        }
         else
         {
             if (state != PetNodeState.Failure)
+            {
                 return PetNodeState.Running;
+            }
             else
                 return PetNodeState.Failure;
         }
