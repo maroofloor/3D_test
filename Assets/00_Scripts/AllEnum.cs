@@ -23,4 +23,11 @@ public class AllEnum
         End
     }
 
+    public enum ItemTypeForDB
+    {
+        None,
+        Food,
+        Sword,
+        HeadGear
+    }
 }
