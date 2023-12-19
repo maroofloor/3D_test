@@ -25,8 +25,7 @@ public class DBAccess : MonoBehaviour
         dbConnection = new SqliteConnection(file);
         dbConnection.Open();
 
-        InsertData("활");
-        PrintData(true);
+        UpdateData();
 
         reader.Dispose();
         reader = null;
@@ -72,12 +71,25 @@ public class DBAccess : MonoBehaviour
         }
     }
 
-    void InsertData(string name)
+    void InsertData()
     {
         Debug.Log("=========아이템 추가=========");
         dbCommand = dbConnection.CreateCommand();
-        dbCommand.CommandText = "insert ItemInfo (Name, Price, MaxCount, ItemType) values (\"활\", 1500, 1, 2)";
+        dbCommand.CommandText = "Insert into ItemInfo (Name, Price, MaxCount, ItemType) values (\"활\", 1500, 1, 2)";
 
         dbCommand.ExecuteReader();
+
+        PrintData(true);
+    }
+
+    void UpdateData()
+    {
+        Debug.Log("=========아이템 수정=========");
+        dbCommand = dbConnection.CreateCommand();
+        dbCommand.CommandText = "Update ItemInfo set Name = \"지팡이\" where Name = \"활\"";
+
+        dbCommand.ExecuteReader();
+
+        PrintData(true);
     }
 }

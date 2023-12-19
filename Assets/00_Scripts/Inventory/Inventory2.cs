@@ -10,7 +10,7 @@ public class Inventory2
     public Inventory2()
     {
     }
-    public Inventory2(int index, int slotCount = 10)
+    public Inventory2(int index, int slotCount)
     {
         inventoryIndex = index;
 
